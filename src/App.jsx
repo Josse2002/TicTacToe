@@ -8,8 +8,20 @@ import './App.css'
 
 function App() {
 
-  const [turn, setTurn] = useState(TURNS.X);
-  const [board, setBoard] = useState(Array(9).fill(null));
+  const [turn, setTurn] = useState(
+    () => {
+      const turnFromStorage = window.localStorage.getItem('turn');
+      return turnFromStorage ? turnFromStorage : TURNS.X;
+    }
+  );
+  const [board, setBoard] = useState(() => {
+    const boardFromStorage = window.localStorage.getItem('board');
+    if (boardFromStorage) {
+      return JSON.parse(boardFromStorage);
+    }else{
+      return Array(9).fill(null);
+    }
+  });
   //Estado del ganador
   //null es porque no hay ganador y false si hay empate
   const [winner, setWinner] = useState(null);
@@ -21,11 +33,9 @@ function App() {
     setTurn(TURNS.X);
     setBoard(Array(9).fill(null));
     setWinner(null);
-
+    window.localStorage.removeItem('board');
+    window.localStorage.removeItem('turn');
   }
-
- 
-
 
   const updateBoard = (index) => {
 
@@ -39,9 +49,13 @@ function App() {
 
     //actualizando el estado
     setTurn(newTurn);
-    //actualizando el estado
 
-
+    //guardar la partida
+    window.localStorage.setItem('board', JSON.stringify(newBoard)); 
+    //el local storage guarda por defecto strings, por eso se usa 
+    //JSON.stringify para convertir el array en un string
+    window.localStorage.setItem('turn', newTurn); 
+    
     //verificando si hay ganador
     const newWinner = checkWinnerFrom(newBoard);
     if (newWinner) {
@@ -51,7 +65,7 @@ function App() {
     } else if (checkEndGame(newBoard)) {
       setWinner(false);
     }
-
+    
   };
 
 
