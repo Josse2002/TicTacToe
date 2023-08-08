@@ -1,8 +1,6 @@
-# React + Vite
+#TicTacToe Game in React.js
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Enjoy the classic TicTacToe game implemented using React.js. Challenge a friend or play against the computer in this age-old battle of X's and O's.
 
-Currently, two official plugins are available:
+Technologies: React.js, HTML/CSS, Canvas-Confetti.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
